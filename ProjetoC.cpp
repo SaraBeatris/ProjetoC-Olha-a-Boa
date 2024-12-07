@@ -70,7 +70,7 @@ struct Cartela {
         return false;
     }
 
-    // Verifica padrões
+    // Verifica padroes
     bool verificarPadroes() {
         for (int i = 0; i < TAM; i++) {
             if (all_of(marcados[i], marcados[i] + TAM, [](int v) { return v == 1; })) {
@@ -101,7 +101,7 @@ struct Cartela {
         return false;
     }
 
-    // Verifica se falta um número
+    // Verifica se falta um numero
     bool faltaUm() {
         int desmarcados = 0;
         for (int i = 0; i < TAM; i++) {
@@ -134,7 +134,7 @@ public:
             novaCartela.gerar();
             cartelas.push_back(novaCartela);
         }
-        cout << quantidade << " cartelas geradas para o usuário " << nome << ".\n";
+        cout << quantidade << " cartelas geradas para o usuario " << nome << ".\n";
     }
 
     void exibirCartelas() {
@@ -148,7 +148,7 @@ public:
         bool encontrado = false;
         for (size_t i = 0; i < cartelas.size(); ++i) {
             if (cartelas[i].marcarNumero(numero)) {
-                cout << "Número " << numero << " marcado na cartela " << i + 1 << ".\n";
+                cout << "Numero " << numero << " marcado na cartela " << i + 1 << ".\n";
                 cartelas[i].verificarPadroes();
                 cartelas[i].faltaUm();
                 encontrado = true;
@@ -177,23 +177,23 @@ public:
             }
             arquivo.close();
         }
-        cout << "Dados do usuário " << nome << " salvos com sucesso!\n";
+        cout << "Dados do usuario " << nome << " salvos com sucesso!\n";
     }
 };
 
-// Lista global para armazenar números chamados
+// Lista global para armazenar numeros chamados
 set<int> numerosChamados;
 
-// Função para gerar IDs únicos
+// Funcao para gerar IDs unicos
 int gerarID() {
     return rand() % 1000 + 1;
 }
 
-// Exibir os números já chamados
+// Exibir os numeros ja chamados
 void exibirNumerosChamados() {
-    cout << "Números já chamados: ";
+    cout << "Numeros ja chamados: ";
     if (numerosChamados.empty()) {
-        cout << "Nenhum número chamado ainda.\n";
+        cout << "Nenhum numero chamado ainda.\n";
     } else {
         for (int numero : numerosChamados) {
             cout << numero << " ";
@@ -208,30 +208,30 @@ void menu() {
     int opcao;
     do {
         cout << "\n=== Menu Principal ===\n";
-        cout << "1. Cadastrar Usuário\n";
-        cout << "2. Adicionar Cartelas ao Usuário\n";
-        cout << "3. Exibir Cartelas de um Usuário\n";
-        cout << "4. Marcar Número nas Cartelas\n";
-        cout << "5. Exibir Números Já Chamados\n";
-        cout << "6. Salvar Dados do Usuário\n";
+        cout << "1. Cadastrar Usuario\n";
+        cout << "2. Adicionar Cartelas ao Usuario\n";
+        cout << "3. Exibir Cartelas de um Usuario\n";
+        cout << "4. Marcar Numero nas Cartelas\n";
+        cout << "5. Exibir Numeros Ja Chamados\n";
+        cout << "6. Salvar Dados do Usuario\n";
         cout << "7. Sair\n";
-        cout << "Escolha uma opção: ";
+        cout << "Escolha uma opcao: ";
         cin >> opcao;
         cin.ignore();
 
         switch (opcao) {
             case 1: {
                 string nome;
-                cout << "Digite o nome do usuário: ";
+                cout << "Digite o nome do usuario: ";
                 getline(cin, nome);
                 int id = gerarID();
                 usuarios.emplace_back(nome, id);
-                cout << "Usuário " << nome << " cadastrado com ID " << id << ".\n";
+                cout << "Usuario " << nome << " cadastrado com ID " << id << ".\n";
                 break;
             }
             case 2: {
                 int id;
-                cout << "Digite o ID do usuário: ";
+                cout << "Digite o ID do usuario: ";
                 cin >> id;
                 auto it = find_if(usuarios.begin(), usuarios.end(), [&](Usuario &u) { return u.id == id; });
                 if (it != usuarios.end()) {
@@ -240,37 +240,37 @@ void menu() {
                     cin >> quantidade;
                     it->adicionarCartelas(quantidade);
                 } else {
-                    cout << "Usuário não encontrado.\n";
+                    cout << "Usuario nao encontrado.\n";
                 }
                 break;
             }
             case 3: {
                 int id;
-                cout << "Digite o ID do usuário: ";
+                cout << "Digite o ID do usuario: ";
                 cin >> id;
                 auto it = find_if(usuarios.begin(), usuarios.end(), [&](Usuario &u) { return u.id == id; });
                 if (it != usuarios.end()) {
                     it->exibirCartelas();
                 } else {
-                    cout << "Usuário não encontrado.\n";
+                    cout << "Usuario nao encontrado.\n";
                 }
                 break;
             }
             case 4: {
                 int id, numero;
-                cout << "Digite o ID do usuário: ";
+                cout << "Digite o ID do usuario: ";
                 cin >> id;
                 auto it = find_if(usuarios.begin(), usuarios.end(), [&](Usuario &u) { return u.id == id; });
                 if (it != usuarios.end()) {
-                    cout << "Digite o número a ser marcado: ";
+                    cout << "Digite o numero a ser marcado: ";
                     cin >> numero;
                     if (!it->marcarNumero(numero)) {
-                        cout << "Número " << numero << " não encontrado em nenhuma cartela.\n";
+                        cout << "Numero " << numero << " nao encontrado em nenhuma cartela.\n";
                     } else {
                         numerosChamados.insert(numero);
                     }
                 } else {
-                    cout << "Usuário não encontrado.\n";
+                    cout << "Usuario nao encontrado.\n";
                 }
                 break;
             }
@@ -279,13 +279,13 @@ void menu() {
                 break;
             case 6: {
                 int id;
-                cout << "Digite o ID do usuário: ";
+                cout << "Digite o ID do usuario: ";
                 cin >> id;
                 auto it = find_if(usuarios.begin(), usuarios.end(), [&](Usuario &u) { return u.id == id; });
                 if (it != usuarios.end()) {
                     it->salvarDados();
                 } else {
-                    cout << "Usuário não encontrado.\n";
+                    cout << "Usuario nao encontrado.\n";
                 }
                 break;
             }
@@ -293,7 +293,7 @@ void menu() {
                 cout << "Saindo...\n";
                 break;
             default:
-                cout << "Opção inválida.\n";
+                cout << "Opcao invalida.\n";
         }
     } while (opcao != 7);
 }
