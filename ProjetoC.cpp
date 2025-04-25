@@ -181,10 +181,10 @@ public:
     }
 };
 
-// Lista global para armazenar numeros chamados
+
 set<int> numerosChamados;
 
-// Funcao para gerar IDs unicos
+
 int gerarID() {
     return rand() % 1000 + 1;
 }
